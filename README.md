@@ -26,9 +26,7 @@ Dalam kasus proyek sistem rekomendasi film, tujuan bisnis adalah membantu penggu
 
 ### Solution Approach
 Untuk mengatasi Problem Statement dalam mengembangkan sistem rekomendasi film yang efektif, dengan cara teknik Content-Based Filtering dan Collaborative Filtering
-1. Content-Based Filtering:
-   Content-Based Filtering menggunakan informasi konten atau atribut dari item (dalam konteks ini, film) untuk membuat profil dan rekomendasi. Ini berfokus pada kemiripan antara preferensi pengguna dengan atribut konten item.
-2. Collaborative Filtering:
+1. Collaborative Filtering:
    Collaborative Filtering berfokus pada pola penilaian pengguna terhadap item dan mengidentifikasi kesamaan preferensi pengguna atau kesamaan item untuk memberikan rekomendasi. Ini tidak memerlukan informasi konten.
 3. Root Mean Squared Error (RMSE)
    Root Mean Squared Error (RMSE) adalah salah satu metrik evaluasi yang umum digunakan untuk mengukur sistem rekomendasi. RMSE mengukur rata-rata dari kuadrat error antara nilai prediksi dan nilai aktual. Semakin kecil nilai RMSE, semakin baik sistem rekomendasi tersebut.
@@ -314,48 +312,6 @@ Variabel-variabel pada Movie Recommendation Data dataset adalah sebagai berikut:
 
 ## Modeling and Result
 Model sisten rekomendasi di buat untuk menyelesaikan permasalahan menggunakan dua model yaitu :
-### Content Based Filtering
-   Model pengembangan dengan Content-Based Filtering adalah salah satu pendekatan dalam sistem rekomendasi yang digunakan untuk memberikan rekomendasi berdasarkan karakteristik atau konten dari item yang dijelaskan oleh fitur-fiturnya. Model ini bekerja dengan menganalisis item yang disukai pengguna sebelumnya dan mencoba untuk merekomendasikan item serupa berdasarkan fitur-fitur item tersebut. Untuk membuat sistem rekomendasi berbasis konten, kita perlu menggunakan konsep vektorisasi, TF-IDF, dan Cosine Similarity. Data atau teks perlu dikonversi menjadi vektor terlebih dahulu sebelum dapat dianalisis.
-
-   Kelebihan content-based filtering:
-   - Efektif untuk item yang memiliki deskripsi yang kaya.
-   - Dapat merekomendasikan film baru kepada pengguna, bahkan jika film tersebut belum pernah dinilai atau ditonton oleh pengguna sebelumnya.
-   - Dapat merekomendasikan film yang tidak terlalu populer, yang mungkin tidak direkomendasikan oleh sistem rekomendasi lainnya.
-     
-   Kekurangan content-based filtering:
-   - Membutuhkan deskripsi film yang lengkap dan akurat.
-   - Dapat merekomendasikan film yang tidak relevan dengan preferensi pengguna, jika deskripsi item tidak akurat atau tidak lengkap.
-   - Dapat merekomendasikan film yang sudah dinilai oleh pengguna sebelumnya.
-
-   Langkah-langkah pembuatan model Content Based Filtering
-   - Menggunakan TF-IDF Vectorizer untuk menemukan representasi fitur penting dari setiap genre film.
-   - Melakukan fit dan transformasi ke dalam bentuk matriks.
-   - Untuk menghasilkan vektor tf-idf dalam bentuk matriks, kita menggunakan fungsi todense().
-   - Menghitung derajat kesamaan (similarity degree) antar film dengan teknik cosine similarity
-   - Membuat fungsi movie_recommendations dengan beberapa parameter sebagai berikut:
-      - nama_movie: Ini adalah parameter yang mewakili nama film yang akan digunakan sebagai referensi untuk mencari rekomendasi film lainnya. Dengan kata lain, ini adalah film yang akan menjadi dasar untuk mencari film-film serupa atau rekomendasi.
-      - similarity_data (default: cosine_sim_df): Parameter ini adalah matriks atau data kesamaan (similarity) antar film. Biasanya, ini akan berisi nilai-nilai kesamaan antara setiap pasangan film dalam dataset. Secara khusus, dalam kode, ini adalah matriks kesamaan kosinus (cosine_sim_df), yang digunakan untuk mengukur sejauh mana dua film serupa.
-      - items (default: movie_new[['movie_name', 'genre']]): Parameter ini adalah DataFrame yang berisi data film. Dalam kode, ini mencakup dua kolom, yaitu 'movie_name' (nama film) dan 'genre' (genre film). Ini digunakan untuk mengidentifikasi film berdasarkan nama dan genre saat mengembalikan rekomendasi.
-      - k (default: 5): Parameter ini menentukan jumlah film rekomendasi yang akan dikembalikan. Secara default, akan mengembalikan 5 rekomendasi teratas, tetapi dapat menggantinya dengan angka lain sesuai dengan berapa banyak rekomendasi yang di inginkan.
-   - Melakukan pengujian model
-   
-Result 
-- Melakukan percobaan untuk untuk menemukan rekomendasi genre movie yang mirip dengan Film misal Welcome to Me (2014)
-   | movie_name	                           |   genre      |
-   | :---------:	                           |  :---------:	|
-   | Welcome to Me (2014)	                  | Comedy, Drama |
-- Top-N recommendation nya :
-  
-   |  | movie_name	                           |   genre      |
-   |--| :---------:	                           |  :---------:	|
-   |0	| Breakfast on Pluto (2005)	            | Comedy, Drama |
-   |1	| Million Dollar Arm (2014)	            | Comedy, Drama |
-   |2	| Deconstructing Harry (1997)	            | Comedy, Drama |
-   |3	| Blaze (1989)	                           | Comedy, Drama |
-   |4	| Paper Birds (Pájaros de papel) (2010)	| Comedy, Drama |
-
-  Sistem memberikan rekomendasi nama film dengan genre yang sama sesuai inputan yaitu genre Comedy, Drama
-
 ### Collaborative Filtering
    Pengembangan model dengan Collaborative Filtering adalah salah satu pendekatan dalam sistem rekomendasi yang menggunakan informasi tentang preferensi pengguna dan item untuk menghasilkan rekomendasi. Pada model ini melakukan persiapan data untuk menyandikan (encode) fitur ‘user’ dan ‘movieId’ ke dalam indeks integer, mapping userId ke dataframe user dan mapping movieId ke dataframe movie, membagi data train dan validasi dengan komposisi 80:20. Model ini menggunakan Binary Crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer
    
@@ -380,10 +336,35 @@ Result
 
 Result 
 - Melakukan percobaan dengan memilih pengguna secara acak
+  
+   - Pengguna yang terpilih userId: 7
+   - Film dengan penilain tertinggi yang dinilai user
 
-![Screenshot 2023-09-05 230921](https://github.com/arifhendrawan023/Proyek-Akhir-Machine-Learning-Terapan-Membuat-Model-Sistem-Rekomendasi/assets/55530939/fcb2f58b-9ce9-40ce-8945-f315e6da4879)
 
-Rekomendasi tersebut mencakup film-film yang telah mendapatkan peringkat tinggi dari pengguna dengan ID 239 serta daftar top 10 rekomendasi film yang mungkin sesuai dengan preferensinya. Rekomendasi ini dapat membantu pengguna menemukan film-film baru yang mungkin mereka nikmati berdasarkan preferensi mereka sebelumnya.
+   |    Title |      Genre  |
+   |:------------|:-------|
+   | Hot Shots! Part Deux (1993) | Action,Comedy,War |
+   | Silence of the Lambs, The (1991) | Crime,Horror,Thriller |
+   | Psycho (1960) | Crime,Horror |
+   | Terminator, The (1984) | Action,Sci-Fi,Thriller |
+   | Seven Samurai (Shichinin no samurai) (1954) | Action,Adventure,Drama |
+   
+   - Top 10 movie recommendation
+   
+   |    Title |      Genre  |
+   |:------------|:-------|
+   | Laura (1944) | Crime,Film-Noir,Mystery |
+   | Top Hat (1935) | Comedy,Musical,Romance |
+   | My Man Godfrey (1936) | Comedy,Romance |
+   | His Girl Friday (1940) | Comedy,Romance |
+   | African Queen, The (1951) | Adventure,Comedy,Romance|War |
+   | Cat on a Hot Tin Roof (1958) | Drama |
+   | Lawrence of Arabia (1962) | Adventure,Drama,War |
+   | Grand Day Out with Wallace and Gromit, A (1989) | Adventure,Animation,Children,Comedy,Sci-Fi |
+   | Harold and Maude (1971) | Comedy,Drama,Romance |
+   | Great Escape, The (1963) | Action,Adventure,Drama,War |
+   
+   Rekomendasi tersebut mencakup film-film yang telah mendapatkan peringkat tinggi dari pengguna dengan ID 7 serta daftar top 10 rekomendasi film yang mungkin sesuai dengan preferensinya. Rekomendasi ini dapat membantu pengguna menemukan film-film baru yang mungkin mereka nikmati berdasarkan preferensi mereka sebelumnya.
 
 ## Evaluation
 Menggunakan metrik Evaluasi root mean squared error (RMSE) untuk mengevaluasi model Collaborative Filtering. Secara umum, RMSE adalah metrik evaluasi yang berguna untuk mengukur sistem rekomendasi. Dengan menggunakan RMSE, kita dapat memastikan bahwa sistem rekomendasi yang kita bangun telah mencapai tujuannya.
@@ -407,3 +388,9 @@ loss: 0.5968 - root_mean_squared_error: 0.1876 - val_loss: 0.6083 - val_root_mea
 
 
 Dari proses ini, kita memperoleh nilai error akhir sebesar sekitar 0.1876 dan error pada data validasi sebesar 0.1998. Nilai tersebut cukup bagus untuk sistem rekomendasi
+
+Hot Shots! Part Deux (1993) : Action,Comedy,War
+Silence of the Lambs, The (1991) : Crime,Horror,Thriller
+Psycho (1960) : Crime,Horror
+Terminator, The (1984) : Action,Sci-Fi,Thriller
+Seven Samurai (Shichinin no samurai) (1954) : Action,Adventure,Drama
