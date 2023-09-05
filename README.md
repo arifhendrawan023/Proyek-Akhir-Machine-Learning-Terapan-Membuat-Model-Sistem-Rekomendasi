@@ -62,7 +62,7 @@ Variabel-variabel pada Movie Recommendation Data dataset adalah sebagai berikut:
    - Karena hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan maka menghapus data duplikat pada kolom 'movieId'
    - Untuk memudahkan pemrosesan data melakukan konversi data series menjadi list. Karena List adalah struktur data yang lebih sederhana daripada series, sehingga lebih mudah untuk diproses oleh komputer.
 
-## Modeling
+## Modeling and Result
 Model sisten rekomendasi di buat untuk menyelesaikan permasalahan menggunakan dua model yaitu :
 ### Content Based Filtering
    Model pengembangan dengan Content-Based Filtering adalah salah satu pendekatan dalam sistem rekomendasi yang digunakan untuk memberikan rekomendasi berdasarkan karakteristik atau konten dari item yang dijelaskan oleh fitur-fiturnya. Model ini bekerja dengan menganalisis item yang disukai pengguna sebelumnya dan mencoba untuk merekomendasikan item serupa berdasarkan fitur-fitur item tersebut. Untuk membuat sistem rekomendasi berbasis konten, kita perlu menggunakan konsep vektorisasi, TF-IDF, dan Cosine Similarity. Data atau teks perlu dikonversi menjadi vektor terlebih dahulu sebelum dapat dianalisis.
